@@ -13,4 +13,10 @@ describe Teacher do
     test_teacher.save
     expect(Teacher.all).to eq [test_teacher]
   end
+
+  it 'is the same teacher if they have the same name and apparatus' do
+    test_teacher1 = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
+    test_teacher2 = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
+    expect(test_teacher1).to eq test_teacher2
+  end
 end

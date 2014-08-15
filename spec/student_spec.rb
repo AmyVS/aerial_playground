@@ -13,4 +13,10 @@ describe Student do
     expect(Student.all).to eq [test_student]
   end
 
+  it 'is the same student if they have the same name' do
+    test_teacher1 = Teacher.new({'name' => 'Jordan'})
+    test_teacher2 = Teacher.new({'name' => 'Jordan'})
+    expect(test_teacher1).to eq test_teacher2
+  end
+
 end
