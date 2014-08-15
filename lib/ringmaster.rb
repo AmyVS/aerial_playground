@@ -41,4 +41,9 @@ class Ringmaster
     list
   end
 
+  def delete
+    table_name = self.class.to_s.downcase.pluralize
+    DB.exec("DELETE FROM #{table_name} WHERE id = #{self.id}")
+  end
+
 end

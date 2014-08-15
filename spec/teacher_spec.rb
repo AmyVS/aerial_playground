@@ -28,4 +28,11 @@ describe Teacher do
     expect(Teacher.show_list).to eq ['1. Daniela', '2. Kelsey']
   end
 
+  it 'deletes a teacher from the database' do
+    test_teacher = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
+    test_teacher.save
+    test_teacher.delete
+    expect(Teacher.all).to eq []
+  end
+
 end
