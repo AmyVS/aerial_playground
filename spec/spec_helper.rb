@@ -1,8 +1,10 @@
 require 'pg'
 require 'rspec'
 
+require 'ringmaster'
 require 'student'
 require 'teacher'
+
 
 DB = PG.connect({:dbname => 'aerial_playground_test'})
 

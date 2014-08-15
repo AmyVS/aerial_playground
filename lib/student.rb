@@ -1,4 +1,4 @@
-class Student
+class Student < Ringmaster
   attr_reader :name
 
   def initialize attributes

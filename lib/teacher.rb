@@ -1,4 +1,4 @@
-class Teacher
+class Teacher < Ringmaster
   attr_reader :name, :apparatus, :id
 
   def initialize attributes
@@ -6,10 +6,10 @@ class Teacher
     @apparatus = attributes['apparatus']
   end
 
-  def save
-    save = DB.exec("INSERT INTO teachers (name, apparatus) VALUES ('#{@name}', '#{@apparatus}') RETURNING id;")
-    @id = save.first['id'].to_i
-  end
+  # def save
+  #   save = DB.exec("INSERT INTO teachers (name, apparatus) VALUES ('#{@name}', '#{@apparatus}') RETURNING id;")
+  #   @id = save.first['id'].to_i
+  # end
 
   def == another_teacher
     self.name == another_teacher.name &&
