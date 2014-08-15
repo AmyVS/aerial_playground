@@ -13,6 +13,15 @@ class Ringmaster
     end
   end
 
+  def == another_instance
+    if self.class == Teacher
+      self.name == another_instance.name &&
+      self.apparatus == another_instance.apparatus
+    elsif self.class == Student
+      self.name == another_instance.name
+    end
+  end
+
   def self.all
     table_name = self.to_s.downcase.pluralize
     results = DB.exec("SELECT * FROM #{table_name};")

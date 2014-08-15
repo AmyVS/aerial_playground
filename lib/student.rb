@@ -5,8 +5,4 @@ class Student < Ringmaster
     @name = attributes['name']
   end
 
-  def == another_student
-    self.name == another_student.name
-  end
-
 end

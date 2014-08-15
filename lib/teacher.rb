@@ -6,8 +6,4 @@ class Teacher < Ringmaster
     @apparatus = attributes['apparatus']
   end
 
-  def == another_teacher
-    self.name == another_teacher.name &&
-    self.apparatus == another_teacher.apparatus
-  end
 end
