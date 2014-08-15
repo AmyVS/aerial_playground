@@ -22,10 +22,10 @@ describe Teacher do
 
   it 'shows all teachers in the database' do
     test_teacher1 = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
-    test_teacher2 = Teacher.new({'name' => 'Kelsey', 'apparatus' => 'static trapeze'})
+    test_teacher2 = Teacher.new({'name' => 'Shersten', 'apparatus' => 'straps'})
     test_teacher1.save
     test_teacher2.save
-    expect(Teacher.show_list).to eq ['1. Daniela', '2. Kelsey']
+    expect(Teacher.show_list).to eq ['1. Daniela', '2. Shersten']
   end
 
   it 'deletes a teacher from the database' do
