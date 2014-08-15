@@ -5,4 +5,8 @@ class Student < Ringmaster
     @name = attributes['name']
   end
 
+  def assign_to(teacher)
+    DB.exec("INSERT INTO classes (teacher_id, student_id) VALUES (#{teacher.id}, #{@id})")
+  end
+
 end

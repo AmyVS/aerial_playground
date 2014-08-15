@@ -44,4 +44,16 @@ describe Teacher do
     expect(test_teacher.apparatus).to eq 'cloud swing'
   end
 
+  it 'has many students' do
+    test_teacher = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
+    test_teacher.save
+    test_student1 = Student.new({'name' => 'Jordan'})
+    test_student1.save
+    test_student2 = Student.new({'name' => 'Leia'})
+    test_student2.save
+    test_student1.assign_to(test_teacher)
+    test_student2.assign_to(test_teacher)
+    expect(test_teacher.students).to eq [test_student1, test_student2]
+  end
+
 end
