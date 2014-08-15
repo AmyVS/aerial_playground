@@ -34,4 +34,16 @@ describe Student do
     expect(Student.all).to eq []
   end
 
+  it 'has many teachers so they can learn a variety of apparatuses' do
+    test_student = Student.new({'name' => 'Lee'})
+    test_student.save
+    test_teacher1 = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
+    test_teacher1.save
+    test_teacher2 = Teacher.new({'name' => 'Shersten', 'apparatus' => 'straps'})
+    test_teacher2.save
+    test_student.assign_to(test_teacher1)
+    test_student.assign_to(test_teacher2)
+    expect(test_student.teachers).to eq [test_teacher1, test_teacher2]
+  end
+
 end

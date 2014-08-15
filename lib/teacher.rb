@@ -14,6 +14,10 @@ class Teacher < Ringmaster
     @apparatus = results.first['apparatus']
   end
 
+  def assign_to(student)
+    DB.exec("INSERT INTO classes (teacher_id, student_id) VALUES (#{@id}, #{student.id});")
+  end
+
   def students
     results = DB.exec("SELECT * FROM students JOIN classes
                       ON (students.id = classes.student_id)
