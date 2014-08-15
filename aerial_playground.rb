@@ -21,3 +21,5 @@ def welcome
     puts "Invalid option. Please select [s], [t], or [x]."
   end
 end
+
+welcome
