@@ -7,4 +7,10 @@ describe Teacher do
     expect(test_teacher.name).to eq 'Daniela'
     expect(test_teacher.apparatus).to eq 'static trapeze'
   end
+
+  it 'saves a teacher to the database' do
+    test_teacher = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
+    test_teacher.save
+    expect(Teacher.all).to eq [test_teacher]
+  end
 end
