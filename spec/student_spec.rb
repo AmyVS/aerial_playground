@@ -27,4 +27,11 @@ describe Student do
     expect(Student.show_list).to eq ['1. Jordan', '2. Audra']
   end
 
+  it 'deletes a student from the database' do
+    test_student = Student.new({'name' => 'Jordan'})
+    test_student.save
+    test_student.delete
+    expect(Student.all).to eq []
+  end
+
 end
