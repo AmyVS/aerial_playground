@@ -14,9 +14,17 @@ describe Student do
   end
 
   it 'is the same student if they have the same name' do
-    test_teacher1 = Teacher.new({'name' => 'Jordan'})
-    test_teacher2 = Teacher.new({'name' => 'Jordan'})
-    expect(test_teacher1).to eq test_teacher2
+    test_student1 = Student.new({'name' => 'Jordan'})
+    test_student2 = Student.new({'name' => 'Jordan'})
+    expect(test_student1).to eq test_student2
+  end
+
+  it 'shows all students in the database' do
+    test_student1 = Student.new({'name' => 'Jordan'})
+    test_student2 = Student.new({'name' => 'Audra'})
+    test_student1.save
+    test_student2.save
+    expect(Student.show_list).to eq ['1. Jordan', '2. Audra']
   end
 
 end

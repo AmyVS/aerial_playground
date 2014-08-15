@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'active_support/core_ext/string/inflections'
+require 'pry'
 
 class Ringmaster
 
@@ -30,6 +31,14 @@ class Ringmaster
       class_instances << self.new(result)
     end
     class_instances
+  end
+
+  def self.show_list
+    list = []
+    self.all.each_with_index do |object, index|
+      list << "#{index+1}. #{object.name}"
+    end
+    list
   end
 
 end

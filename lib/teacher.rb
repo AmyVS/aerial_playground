@@ -1,3 +1,5 @@
+require 'pry'
+
 class Teacher < Ringmaster
   attr_reader :name, :apparatus, :id
 
