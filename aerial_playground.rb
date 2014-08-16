@@ -110,12 +110,6 @@ def add_teacher
   teacher_menu
 end
 
-def list_teachers
-  puts "\nHere's a list of all the teachers:"
-  puts Teacher.show_list
-  sleep(1)
-  teacher_menu
-end
 
 def student_menu
   system('clear')
@@ -162,6 +156,13 @@ def add_student
   puts "\n#{new_student.name} has been successfully added to the database."
   sleep(1)
   student_menu
+end
+
+def list_teachers
+  puts "\nHere's a list of all the teachers:"
+  puts Teacher.show_list
+  sleep(1)
+  teacher_menu
 end
 
 welcome
