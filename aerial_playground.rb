@@ -112,7 +112,7 @@ def add_teacher
   teacher_menu
 end
 
-def update_apparatus
+def update_apparatus #Work in progress
   puts "\n#{@current_teacher.name}'s current apparatus: #{@current_teacher.apparatus}"
   puts "What would you like #{@current_teacher.name}'s new apparatus to be?"
 
@@ -222,12 +222,24 @@ def add_student
   student_menu
 end
 
-# def list_teachers
-#   puts "\nHere's a list of all the teachers:"
-#   puts Teacher.show_list
-#   sleep(1)
-#   teacher_menu
-# end
+def teachers_by_apparatus
+  puts "\nHere's a list of all the teachers and their apparatuses:"
+  Teacher.all.each do |teacher|
+    puts "#{teacher.name}: #{teacher.apparatus}"
+  end
+  puts "\nPress [x] if you would like to return to the student menu."
+  user_choice = gets.chomp
+
+  case user_choice
+  when 'x'
+    puts "Returning to student menu..."
+    sleep(1)
+    student_menu
+  else
+    puts "Invalid option. Please try again."
+    teachers_by_apparatus
+  end
+end
 
 def remove_student
   puts "\nAre you sure you want to remove #{@current_student.name} from the database? y/n"
