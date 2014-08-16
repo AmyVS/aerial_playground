@@ -126,10 +126,21 @@ def students_assigned_to_teacher
     @current_teacher.students.each_with_index do |student, index|
       puts "#{index+1}. #{student.name}"
     end
-    puts "\nPlease press any key to return to the teacher menu."
+    puts "\nPlease enter the index number for the student, if you wish to unenroll them, or"
+    puts "press any key to return to the teacher menu."
     user_input = gets.chomp
-    if user_input
+
+    if user_input.to_i == 0
+      puts "\nReturning to the teacher menu..."
+      sleep(1)
       teacher_menu
+    else
+      @current_student = Student.all.fetch((user_choice.to_i)-1) do |number|
+      puts "#{number+1} is not a valid option. Please try again."
+      sleep(1)
+      students_assigned_to_teacher
+      end
+      unenroll
     end
   end
 end
