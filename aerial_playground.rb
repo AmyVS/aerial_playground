@@ -70,7 +70,17 @@ def teacher_menu
   end
 end
 
-def
+def add_teacher
+  puts "\n\nPlease enter the new teacher's name:"
+  teacher_name = gets.chomp
+  puts "\nPlease enter this teacher's apparatus:"
+  teacher_apparatus = gets.chomp
+  new_teacher = Teacher.new({'name' => teacher_name, 'apparatus' => teacher_apparatus})
+  new_teacher.save
+  puts "\n#{new_teacher.name} has been successfully added to the database."
+  sleep(1)
+  teacher_menu
+end
 
 def student_menu
   system('clear')
