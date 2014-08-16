@@ -46,4 +46,13 @@ describe Student do
     expect(test_student.teachers).to eq [test_teacher1, test_teacher2]
   end
 
+  it 'unenrolls a student from a class' do
+    test_student = Student.new({'name' => 'Lee'})
+    test_student.save
+    test_teacher = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
+    test_teacher.save
+    test_student.assign_to(test_teacher)
+    test_student.unenroll(test_teacher)
+    expect(test_student.teachers).to eq []
+  end
 end

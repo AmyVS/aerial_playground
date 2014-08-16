@@ -20,5 +20,4 @@ class Student < Ringmaster
     end
     @teachers
   end
-
 end

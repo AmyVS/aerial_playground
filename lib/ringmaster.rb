@@ -46,4 +46,10 @@ class Ringmaster
     DB.exec("DELETE FROM #{table_name} WHERE id = #{self.id};")
   end
 
+   def unenroll(teacher_id)
+    if self.class == Student
+      DB.exec("DELETE FROM classes WHERE student_id = #{self.id} AND teacher_id = #{teacher_id.id};")
+    end
+  end
+
 end
