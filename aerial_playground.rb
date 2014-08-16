@@ -49,7 +49,7 @@ def teacher_menu
 
   puts "\nTo update or remove a teacher's information,"
   puts "please select the index number of the teacher."
-  puts "Otherwise select:"
+  puts "\nOtherwise, select:"
   puts "[a] to add a teacher new teacher, or"
   puts "[x] to return to the main menu."
 
@@ -71,6 +71,27 @@ def teacher_menu
   else
     @current_teacher = Teacher.all.fetch((user_choice.to_i)-1) do |number|
       puts "#{number+1} is not a valid option. Please try again.\n\n"
+      sleep(1)
+      teacher_menu
+    end
+    puts "\nPlease select from the following:"
+    puts "[u] to update #{@current_teacher.name}'s apparatus,"
+    puts "[r] to remove #{@current_teacher.name} from the database, or"
+    puts "[x] to return to the teacher menu."
+
+    user_choice = gets.chomp
+
+    case user_choice
+    when 'u'
+      update_apparatus
+    when 'r'
+      remove_teacher
+    when 'x'
+      puts "Returning to the teacher menu..."
+      sleep(1)
+      teacher_menu
+    else
+      puts "Invalid option. Please try again."
       sleep(1)
       teacher_menu
     end
