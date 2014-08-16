@@ -77,7 +77,7 @@ def teacher_menu
       teacher_menu
     end
     puts "\nPlease select from the following:"
-    # puts "[s] to see all of #{@current_teacher}'s students,"
+    puts "[s] to see all of #{@current_teacher.name}'s students,"
     puts "[u] to update #{@current_teacher.name}'s apparatus,"
     puts "[r] to remove #{@current_teacher.name} from the database, or"
     puts "[x] to return to the teacher menu."
@@ -85,8 +85,8 @@ def teacher_menu
     user_choice = gets.chomp
 
     case user_choice
-    # when 's'
-    #   students_assigned_to_teacher
+    when 's'
+      students_assigned_to_teacher
     when 'u'
       update_apparatus
     when 'r'
@@ -115,10 +115,24 @@ def add_teacher
   teacher_menu
 end
 
-# def students_assigned_to_teacher
-#   puts "\n\nHere's #{@current_teacher}'s current students:"
-
-# end
+def students_assigned_to_teacher
+  if @current_teacher.students.length == 0
+    puts "\nLooks like #{@current_teacher.name} doesn't have any students yet."
+    puts "Please go to the student menu to add new students to #{@current_teacher.name}'s class."
+    sleep(1.5)
+    main_menu
+  else
+    puts "\n\nHere's #{@current_teacher.name}'s current students:"
+    @current_teacher.students.each_with_index do |student, index|
+      puts "#{index+1}. #{student.name}"
+    end
+    puts "\nPlease press any key to return to the teacher menu."
+    user_input = gets.chomp
+    if user_input
+      teacher_menu
+    end
+  end
+end
 
 def update_apparatus #Work in progress
   puts "\n#{@current_teacher.name}'s current apparatus: #{@current_teacher.apparatus}"
@@ -195,8 +209,8 @@ def student_menu
     end
     puts "\nPlease select from the following:"
     puts "[t] to list all teachers and their apparatuses, and choose a class,"
-    puts "[c] to choose a teacher for #{@current_student.name},"
-    puts "[r] to remove #{@current_student.name} from the database"
+    puts "[u] to unenroll a student in a class,"
+    puts "[r] to remove #{@current_student.name} from the database;"
     puts "[x] to return to the main menu."
 
     user_choice = gets.chomp
@@ -204,6 +218,8 @@ def student_menu
     case user_choice
     when 't'
       teachers_by_apparatus
+    when 'u'
+      unenroll_student
     when 'r'
       remove_student
     when 'x'
@@ -256,6 +272,10 @@ def teachers_by_apparatus
     choose_teacher
   end
 end
+
+# def unenroll_student
+
+# end
 
 def choose_teacher
   puts "\nYou've selected #{@current_teacher.name} and the apparatus, #{@current_teacher.apparatus}."
