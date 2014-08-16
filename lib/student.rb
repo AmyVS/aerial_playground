@@ -3,6 +3,7 @@ class Student < Ringmaster
 
   def initialize attributes
     @name = attributes['name']
+    @id = attributes['id'].to_i
     @teachers = []
   end
 
