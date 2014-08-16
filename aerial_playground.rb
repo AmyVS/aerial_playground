@@ -11,12 +11,14 @@ def welcome
   puts "*" * 33
   puts "Welcome to the Aerial Playground!"
   puts "*" * 33
-  puts "\n"
   main_menu
 end
 
 def main_menu
-  puts "Enter [t] if you are a teacher, [s] if you are a student, or [x] to exit."
+  puts "\nPlease enter:"
+  puts "[t] if you are a teacher,"
+  puts "[s] if you are a student, or"
+  puts "[x] to exit."
   user_choice = gets.chomp
 
   case user_choice
@@ -25,7 +27,7 @@ def main_menu
   when 's'
     student_menu
   when 'x'
-    puts "Have a good one!"
+    puts "\nHave a good one!"
     exit
   else
     puts "\nInvalid option. Please try again.\n\n"
@@ -39,8 +41,12 @@ def teacher_menu
   puts "*" * 12
   puts "Teacher Menu"
   puts "*" * 12
-  puts "\nEnter [a] to add a teacher or student, [l] to list all teachers or students, [u] to update a teacher's apparatus,"
-  puts "[r] to remove a teacher or student from the database, or [x] to return to the main menu."
+  puts "\nPlease enter:"
+  puts "[a] to add a teacher or student,"
+  puts "[l] to list all teachers or students,"
+  puts "[u] to update a teacher's apparatus,"
+  puts "[r] to remove a teacher or student from the database, or"
+  puts "[x] to return to the main menu."
 
   user_choice = gets.chomp
 
