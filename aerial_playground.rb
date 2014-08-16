@@ -39,20 +39,20 @@ def teacher_menu
   puts "*" * 12
   puts "Teacher Menu"
   puts "*" * 12
-  puts "\nEnter [a] to add a teacher, [l] to list all teachers, [s] to list teachers by specialty,"
-  puts "[r] to remove a teacher from the database, or [x] to return to the main menu."
+  puts "\nEnter [a] to add a teacher or student, [l] to list all teachers or students, [u] to update a teacher's apparatus,"
+  puts "[r] to remove a teacher or student from the database, or [x] to return to the main menu."
 
   user_choice = gets.chomp
 
   case user_choice
   when 'a'
-    add_teacher
+    add_person
   when 'l'
-    list_teachers
-  when 's'
-    teachers_by_apparatus
+    list_people
+  when 'u'
+    update_apparatus
   when 'r'
-    delete_teacher
+    delete_person
   when 'x'
     puts "\nReturning to the main menu..."
     sleep(1)
