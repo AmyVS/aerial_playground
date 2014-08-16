@@ -112,6 +112,18 @@ def add_teacher
   teacher_menu
 end
 
+def update_apparatus
+  puts "\n#{@current_teacher.name}'s current apparatus: #{@current_teacher.apparatus}"
+  puts "What would you like #{@current_teacher.name}'s new apparatus to be?"
+
+  user_input = gets.chomp
+  @current_teacher.update_apparatus(user_input)
+
+  puts "#{@current_teacher.apparatus} is now listed as @#{current_teacher}'s apparatus."
+  sleep(1)
+  teacher_menu
+end
+
 def remove_teacher
   puts "\nAre you sure you want to remove #{@current_teacher.name} from the database? y/n"
   puts "Friendly reminder - this action cannot be undone."
