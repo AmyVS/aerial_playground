@@ -52,7 +52,7 @@ def teacher_menu
 
   case user_choice
   when 'a'
-    add_techer
+    add_teacher
   when 'l'
     list_teachers(:teacher)
   when 'u'
@@ -70,13 +70,15 @@ def teacher_menu
   end
 end
 
+def
+
 def student_menu
   system('clear')
   puts "*" * 12
   puts "Student Menu"
   puts "*" * 12
   puts "\nPlease enter:"
-  puts "[a] to a student to the database,"
+  puts "[a] to add a student to the database,"
   puts "[s] to list all students"
   puts "[t] to list all teachers and their apparatuses,"
   puts "[c] to change teachers,"
@@ -106,4 +108,5 @@ def student_menu
     student_menu
   end
 end
+
 welcome
