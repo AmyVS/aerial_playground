@@ -119,4 +119,14 @@ def student_menu
   end
 end
 
+def add_student
+  puts "\n\nPlease enter the new student's name:"
+  student_name = gets.chomp
+  new_student = Student.new({'name' => student_name})
+  new_student.save
+  puts "\n#{new_student.name} has been successfully added to the database."
+  sleep(1)
+  student_menu
+end
+
 welcome
