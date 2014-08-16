@@ -7,10 +7,15 @@ require './lib/student'
 DB = PG.connect(:dbname => 'aerial_playground')
 
 def welcome
+  system('clear')
   puts "*" * 33
   puts "Welcome to the Aerial Playground!"
   puts "*" * 33
   puts "\n"
+  main_menu
+end
+
+def main_menu
   puts "Enter [t] if you are a teacher, [s] if you are a student, or [x] to exit."
   user_choice = gets.chomp
 
@@ -23,7 +28,39 @@ def welcome
     puts "Have a good one!"
     exit
   else
-    puts "Invalid option. Please select [s], [t], or [x]."
+    puts "\nInvalid option. Please try again.\n\n"
+    sleep(1)
+    main_menu
+  end
+end
+
+def teacher_menu
+  system('clear')
+  puts "*" * 12
+  puts "Teacher Menu"
+  puts "*" * 12
+  puts "\nEnter [a] to add a teacher, [l] to list all teachers, [s] to list teachers by specialty,"
+  puts "[r] to remove a teacher from the database, or [x] to return to the main menu."
+
+  user_choice = gets.chomp
+
+  case user_choice
+  when 'a'
+    add_teacher
+  when 'l'
+    list_teachers
+  when 's'
+    teachers_by_apparatus
+  when 'r'
+    delete_teacher
+  when 'x'
+    puts "\nReturning to the main menu..."
+    sleep(1)
+    main_menu
+  else
+    puts "\nInvalid option. Please try again."
+    sleep(1)
+    teacher_menu
   end
 end
 
