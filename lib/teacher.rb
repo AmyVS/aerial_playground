@@ -6,6 +6,7 @@ class Teacher < Ringmaster
   def initialize attributes
     @name = attributes['name']
     @apparatus = attributes['apparatus']
+    @id = attributes['id'].to_i
     @students = []
   end
 
