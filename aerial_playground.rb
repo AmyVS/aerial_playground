@@ -6,6 +6,8 @@ require './lib/student'
 
 DB = PG.connect(:dbname => 'aerial_playground')
 
+@current_teacher = nil
+
 def welcome
   system('clear')
   puts "*" * 33
@@ -41,32 +43,37 @@ def teacher_menu
   puts "*" * 12
   puts "Teacher Menu"
   puts "*" * 12
-  puts "\nPlease enter:"
-  puts "[a] to add a teacher new teacher,"
-  puts "[l] to list all teachers,"
-  puts "[u] to update a teacher's apparatus,"
-  puts "[r] to remove a teacher, or"
+
+  puts "\nHere are the teachers currently in our database:"
+  puts Teacher.show_list
+
+  puts "\nTo update or remove a teacher's information,"
+  puts "please select the index number of the teacher."
+  puts "Otherwise select:"
+  puts "[a] to add a teacher new teacher, or"
   puts "[x] to return to the main menu."
 
   user_choice = gets.chomp
 
-  case user_choice
-  when 'a'
-    add_teacher
-  when 'l'
-    list_teachers(:teacher)
-  when 'u'
-    update_apparatus
-  when 'r'
-    delete_teacher
-  when 'x'
-    puts "\nReturning to the main menu..."
-    sleep(1)
-    main_menu
+  if user_choice.to_i == 0
+    case user_choice
+    when 'a'
+      add_teacher
+    when 'x'
+      puts "\nReturning to the main menu..."
+      sleep(1)
+      main_menu
+    else
+      puts "\nInvalid option. Please try again."
+      sleep(1)
+      teacher_menu
+    end
   else
-    puts "\nInvalid option. Please try again."
-    sleep(1)
-    teacher_menu
+    @current_teacher = Teacher.all.fetch((user_choice.to_i)-1) do |number|
+      puts "#{number+1} is not a valid option. Please try again.\n\n"
+      sleep(1)
+      teacher_menu
+    end
   end
 end
 
@@ -78,6 +85,13 @@ def add_teacher
   new_teacher = Teacher.new({'name' => teacher_name, 'apparatus' => teacher_apparatus})
   new_teacher.save
   puts "\n#{new_teacher.name} has been successfully added to the database."
+  sleep(1)
+  teacher_menu
+end
+
+def list_teachers
+  puts "\nHere's a list of all the teachers:"
+  puts Teacher.show_list
   sleep(1)
   teacher_menu
 end
@@ -103,7 +117,7 @@ def student_menu
   when 's'
     list_students
   when 't'
-    list_teachers(:student)
+    teachers_by_apparatus
   when 'c'
     change_teachers
   when 'r'
