@@ -8,6 +8,7 @@ require './lib/student'
 DB = PG.connect(:dbname => 'aerial_playground')
 
 @current_teacher = nil
+@current_student = nil
 
 def welcome
   system('clear')
@@ -119,7 +120,6 @@ def remove_teacher
 
   case user_choice
   when 'y'
-    binding.pry
     @current_teacher.delete
     puts "\n#{@current_teacher.name} has been successfully removed from the database."
     puts "Returning to the teacher menu..."
@@ -210,11 +210,34 @@ def add_student
   student_menu
 end
 
-def list_teachers
-  puts "\nHere's a list of all the teachers:"
-  puts Teacher.show_list
-  sleep(1)
-  teacher_menu
+# def list_teachers
+#   puts "\nHere's a list of all the teachers:"
+#   puts Teacher.show_list
+#   sleep(1)
+#   teacher_menu
+# end
+
+def remove_student
+  puts "\nAre you sure you want to remove #{@current_student.name} from the database? y/n"
+  puts "Friendly reminder - this action cannot be undone."
+
+  user_choice = gets.chomp
+
+  case user_choice
+  when 'y'
+    @current_student.delete
+    puts "\n#{@current_student.name} has been successfully removed from the database."
+    puts "Returning to the student menu..."
+    sleep(1)
+    student_menu
+  when 'n'
+    puts "Whew, that was a close one! Returning to the student menu..."
+    sleep(1)
+    student_menu
+  else
+    puts "Invalid option. Please try again."
+    remove_student
+  end
 end
 
 welcome
