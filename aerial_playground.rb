@@ -42,23 +42,23 @@ def teacher_menu
   puts "Teacher Menu"
   puts "*" * 12
   puts "\nPlease enter:"
-  puts "[a] to add a teacher or student,"
-  puts "[l] to list all teachers or students,"
+  puts "[a] to add a teacher new teacher,"
+  puts "[l] to list all teachers,"
   puts "[u] to update a teacher's apparatus,"
-  puts "[r] to remove a teacher or student from the database, or"
+  puts "[r] to remove a teacher, or"
   puts "[x] to return to the main menu."
 
   user_choice = gets.chomp
 
   case user_choice
   when 'a'
-    add_person
+    add_techer
   when 'l'
-    list_people
+    list_teachers(:teacher)
   when 'u'
     update_apparatus
   when 'r'
-    delete_person
+    delete_teacher
   when 'x'
     puts "\nReturning to the main menu..."
     sleep(1)
@@ -70,4 +70,40 @@ def teacher_menu
   end
 end
 
+def student_menu
+  system('clear')
+  puts "*" * 12
+  puts "Student Menu"
+  puts "*" * 12
+  puts "\nPlease enter:"
+  puts "[a] to a student to the database,"
+  puts "[s] to list all students"
+  puts "[t] to list all teachers and their apparatuses,"
+  puts "[c] to change teachers,"
+  puts "[r] to remove a student from the database"
+  puts "[x] to return to the main menu."
+
+  user_choice = gets.chomp
+
+  case user_choice
+  when 'a'
+    add_student
+  when 's'
+    list_students
+  when 't'
+    list_teachers(:student)
+  when 'c'
+    change_teachers
+  when 'r'
+    remove_student
+  when 'x'
+    puts "\nReturning to the main menu..."
+    sleep(1)
+    main_menu
+  else
+    puts "\nInvalid option. Please try again."
+    sleep(1)
+    student_menu
+  end
+end
 welcome
