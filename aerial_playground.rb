@@ -1,4 +1,5 @@
 require 'pg'
+require 'pry'
 
 require './lib/ringmaster'
 require './lib/teacher'
@@ -108,6 +109,30 @@ def add_teacher
   puts "\n#{new_teacher.name} has been successfully added to the database."
   sleep(1)
   teacher_menu
+end
+
+def remove_teacher
+  puts "\nAre you sure you want to remove #{@current_teacher.name} from the database? y/n"
+  puts "Friendly reminder - this action cannot be undone."
+
+  user_choice = gets.chomp
+
+  case user_choice
+  when 'y'
+    binding.pry
+    @current_teacher.delete
+    puts "\n#{@current_teacher.name} has been successfully removed from the database."
+    puts "Returning to the teacher menu..."
+    sleep(1)
+    teacher_menu
+  when 'n'
+    puts "Whew, that was a close one! Returning to the teacher menu..."
+    sleep(1)
+    teacher_menu
+  else
+    puts "Invalid option. Please try again."
+    remove_teacher
+  end
 end
 
 
