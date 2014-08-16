@@ -77,6 +77,7 @@ def teacher_menu
       teacher_menu
     end
     puts "\nPlease select from the following:"
+    # puts "[s] to see all of #{@current_teacher}'s students,"
     puts "[u] to update #{@current_teacher.name}'s apparatus,"
     puts "[r] to remove #{@current_teacher.name} from the database, or"
     puts "[x] to return to the teacher menu."
@@ -84,16 +85,18 @@ def teacher_menu
     user_choice = gets.chomp
 
     case user_choice
+    # when 's'
+    #   students_assigned_to_teacher
     when 'u'
       update_apparatus
     when 'r'
       remove_teacher
     when 'x'
-      puts "Returning to the teacher menu..."
+      puts "\nReturning to the teacher menu..."
       sleep(1)
       teacher_menu
     else
-      puts "Invalid option. Please try again."
+      puts "\nInvalid option. Please try again."
       sleep(1)
       teacher_menu
     end
@@ -111,6 +114,11 @@ def add_teacher
   sleep(1)
   teacher_menu
 end
+
+# def students_assigned_to_teacher
+#   puts "\n\nHere's #{@current_teacher}'s current students:"
+
+# end
 
 def update_apparatus #Work in progress
   puts "\n#{@current_teacher.name}'s current apparatus: #{@current_teacher.apparatus}"
@@ -138,11 +146,11 @@ def remove_teacher
     sleep(1)
     teacher_menu
   when 'n'
-    puts "Whew, that was a close one! Returning to the teacher menu..."
+    puts "\nWhew, that was a close one! Returning to the teacher menu..."
     sleep(1)
     teacher_menu
   else
-    puts "Invalid option. Please try again."
+    puts "\nInvalid option. Please try again."
     remove_teacher
   end
 end
@@ -186,8 +194,8 @@ def student_menu
       student_menu
     end
     puts "\nPlease select from the following:"
-    puts "[t] to list all teachers and their apparatuses,"
-    puts "[c] to change teachers for #{@current_student.name},"
+    puts "[t] to list all teachers and their apparatuses, and choose a class,"
+    puts "[c] to choose a teacher for #{@current_student.name},"
     puts "[r] to remove #{@current_student.name} from the database"
     puts "[x] to return to the main menu."
 
@@ -196,8 +204,6 @@ def student_menu
     case user_choice
     when 't'
       teachers_by_apparatus
-    when 'c'
-      change_teachers
     when 'r'
       remove_student
     when 'x'
@@ -224,20 +230,52 @@ end
 
 def teachers_by_apparatus
   puts "\nHere's a list of all the teachers and their apparatuses:"
-  Teacher.all.each do |teacher|
-    puts "#{teacher.name}: #{teacher.apparatus}"
+  Teacher.all.each_with_index do |teacher, index|
+    puts "#{index+1}. #{teacher.name} -- #{teacher.apparatus}"
   end
-  puts "\nPress [x] if you would like to return to the student menu."
+  puts "\nEnter an index number for a teacher, if you'd like to add #{@current_student.name} to their class,"
+  puts "Otherwise, please enter [x] if you would like to return to the student menu."
+  user_choice = gets.chomp
+
+  if user_choice.to_i == 0
+    case user_choice
+    when 'x'
+      puts "\nReturning to student menu..."
+      sleep(1)
+      student_menu
+    else
+      puts "\nInvalid option. Please try again."
+      teachers_by_apparatus
+    end
+  else
+    @current_teacher = Teacher.all.fetch((user_choice.to_i)-1) do |number|
+      puts "#{number+1} is not a valid option. Please try again.\n\n"
+      sleep(1)
+      teachers_by_apparatus
+    end
+    choose_teacher
+  end
+end
+
+def choose_teacher
+  puts "\nYou've selected #{@current_teacher.name} and the apparatus, #{@current_teacher.apparatus}."
+  puts "Would you like to add #{@current_student.name} to #{@current_teacher.name}'s class? y/n"
+
   user_choice = gets.chomp
 
   case user_choice
-  when 'x'
-    puts "Returning to student menu..."
+  when 'y'
+    @current_teacher.assign_to(@current_student)
+    puts "\n#{@current_student.name} has successfully signed up for #{@current_teacher.apparatus}."
+    sleep(1)
+    student_menu
+  when 'n'
+    puts "No worries, returning to student menu..."
     sleep(1)
     student_menu
   else
-    puts "Invalid option. Please try again."
-    teachers_by_apparatus
+    puts "\nInvalid option. Please try again."
+    choose_teacher
   end
 end
 
@@ -255,11 +293,11 @@ def remove_student
     sleep(1)
     student_menu
   when 'n'
-    puts "Whew, that was a close one! Returning to the student menu..."
+    puts "\nWhew, that was a close one! Returning to the student menu..."
     sleep(1)
     student_menu
   else
-    puts "Invalid option. Please try again."
+    puts "\nInvalid option. Please try again."
     remove_student
   end
 end
