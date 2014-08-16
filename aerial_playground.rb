@@ -51,7 +51,7 @@ def teacher_menu
   puts "\nTo update or remove a teacher's information,"
   puts "please select the index number of the teacher."
   puts "\nOtherwise, select:"
-  puts "[a] to add a teacher new teacher, or"
+  puts "[a] to add a new teacher, or"
   puts "[x] to return to the main menu."
 
   user_choice = gets.chomp
@@ -141,35 +141,62 @@ def student_menu
   puts "*" * 12
   puts "Student Menu"
   puts "*" * 12
-  puts "\nPlease enter:"
-  puts "[a] to add a student to the database,"
-  puts "[s] to list all students"
-  puts "[t] to list all teachers and their apparatuses,"
-  puts "[c] to change teachers,"
-  puts "[r] to remove a student from the database"
+
+  puts "Here are the students currently in our database:"
+  puts Student.show_list
+
+  puts "\nTo change teachers or remove a student,"
+  puts "please select the index number of the student."
+
+  puts "\nOtherwise, select:"
+  puts "[a] to add a new student, or"
   puts "[x] to return to the main menu."
 
   user_choice = gets.chomp
 
-  case user_choice
-  when 'a'
-    add_student
-  when 's'
-    list_students
-  when 't'
-    teachers_by_apparatus
-  when 'c'
-    change_teachers
-  when 'r'
-    remove_student
-  when 'x'
-    puts "\nReturning to the main menu..."
-    sleep(1)
-    main_menu
+  if user_choice.to_i == 0
+    case user_choice
+    when 'a'
+      add_student
+    when 'x'
+      puts "\nReturning to the main menu..."
+      sleep(1)
+      main_menu
+    else
+      puts "\nInvalid option. Please try again."
+      sleep(1)
+      student_menu
+    end
   else
-    puts "\nInvalid option. Please try again."
-    sleep(1)
-    student_menu
+    @current_student = Student.all.fetch((user_choice.to_i)-1) do |number|
+      puts "#{number+1} is not a valid option. Please try again."
+      sleep(1)
+      student_menu
+    end
+    puts "\nPlease select from the following:"
+    puts "[t] to list all teachers and their apparatuses,"
+    puts "[c] to change teachers for #{@current_student.name},"
+    puts "[r] to remove #{@current_student.name} from the database"
+    puts "[x] to return to the main menu."
+
+    user_choice = gets.chomp
+
+    case user_choice
+    when 't'
+      teachers_by_apparatus
+    when 'c'
+      change_teachers
+    when 'r'
+      remove_student
+    when 'x'
+      puts "\nReturning to the main menu..."
+      sleep(1)
+      main_menu
+    else
+      puts "\nInvalid option. Please try again."
+      sleep(1)
+      student_menu
+    end
   end
 end
 
