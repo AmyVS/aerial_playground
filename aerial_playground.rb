@@ -300,7 +300,7 @@ def unenroll
     @current_student.unenroll(@current_teacher)
     puts "\n#{@current_student.name} has been unenrolled from #{@current_teacher.name}'s class."
     sleep(1)
-    teacher_menu
+    main_menu
   when 'n'
     puts "\nNo worries, returning to main menu..."
     sleep(1)
