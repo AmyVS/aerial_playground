@@ -20,7 +20,7 @@ describe Teacher do
     expect(test_teacher1).to eq test_teacher2
   end
 
-  it 'shows all teachers in the database' do
+  it 'shows all teachers and their apparatuses in the database' do
     test_teacher1 = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
     test_teacher2 = Teacher.new({'name' => 'Shersten', 'apparatus' => 'straps'})
     test_teacher1.save
