@@ -16,9 +16,11 @@ class Ringmaster
 
   def == another_instance
     if self.class == Teacher
+      self.id == another_instance.id &&
       self.name == another_instance.name &&
       self.apparatus == another_instance.apparatus
     elsif self.class == Student
+      self.id == another_instance.id &&
       self.name == another_instance.name
     end
   end

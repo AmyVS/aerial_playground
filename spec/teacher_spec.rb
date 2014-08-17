@@ -35,15 +35,6 @@ describe Teacher do
     expect(Teacher.all).to eq []
   end
 
-  it 'allows a teacher to update their apparatus' do
-    test_teacher = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
-    test_teacher.save
-    new_apparatus = 'cloud swing'
-    test_teacher.update_apparatus(new_apparatus)
-    test_teacher.save
-    expect(test_teacher.apparatus).to eq 'cloud swing'
-  end
-
   it 'has many students' do
     test_teacher = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
     test_teacher.save

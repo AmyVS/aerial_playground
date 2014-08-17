@@ -334,7 +334,7 @@ def choose_teacher
 
   case user_choice
   when 'y'
-    @current_teacher.assign_to(@current_student)
+    @current_student.assign_to(@current_teacher)
     puts "\n#{@current_student.name} has successfully signed up for #{@current_teacher.apparatus}."
     sleep(1)
     student_menu
