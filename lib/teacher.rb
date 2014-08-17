@@ -7,14 +7,14 @@ class Teacher < Ringmaster
     @name = attributes['name']
     @apparatus = attributes['apparatus']
     @id = attributes['id'].to_i
-    @students = []
   end
 
   def students
     results = DB.exec("SELECT students.* FROM teachers
-                      JOIN classes ON (teachers.id = classes.teacher_id)
-                      JOIN students ON (classes.student_id = students.id)
-                      WHERE teachers.id = #{@id};")
+                        JOIN classes ON (teachers.id = classes.teacher_id)
+                        JOIN students ON (classes.student_id = students.id)
+                        WHERE teachers.id = #{@id};")
+    @students = []
     results.each do |result|
       @students << Student.new(result)
     end

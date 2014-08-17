@@ -4,7 +4,6 @@ class Student < Ringmaster
   def initialize attributes
     @name = attributes['name']
     @id = attributes['id'].to_i
-    @teachers = []
   end
 
   def assign_to(teacher)
@@ -14,9 +13,10 @@ class Student < Ringmaster
 
   def teachers
     results = DB.exec("SELECT teachers.* FROM students
-                      JOIN classes ON (students.id = classes.student_id)
-                      JOIN teachers ON (classes.teacher_id = teachers.id)
-                      WHERE students.id = #{@id};")
+                        JOIN classes ON (students.id = classes.student_id)
+                        JOIN teachers ON (classes.teacher_id = teachers.id)
+                        WHERE students.id = #{@id};")
+    @teachers = []
     results.each do |result|
       @teachers << Teacher.new(result)
     end

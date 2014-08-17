@@ -264,7 +264,7 @@ def teachers_by_apparatus
     end
   else
     @current_teacher = Teacher.all.fetch((user_choice.to_i)-1) do |number|
-      puts "#{number+1} is not a valid option. Please try again.\n\n"
+      puts "\n#{number+1} is not a valid option. Please try again.\n\n"
       sleep(1)
       teachers_by_apparatus
     end
@@ -283,7 +283,7 @@ def classes_enrolled
     @current_student.teachers.each_with_index do |teacher, index|
       puts "#{index+1}. #{teacher.name} -- #{teacher.apparatus}"
     end
-    puts "Press any key to return to the student menu."
+    puts "\nPress any key to return to the student menu."
     user_input = gets.chomp
     if user_input
       student_menu
