@@ -49,8 +49,9 @@ def teacher_menu
   puts "\nHere are the teachers currently in our database:"
   puts Teacher.show_list
 
-  puts "\nTo show assigned students or remove a teacher's information,"
-  puts "please select the index number of the teacher."
+  puts "\nplease select the index number of the teacher,"
+  puts "to show assigned students or remove a teacher's information,"
+
   puts "\nOtherwise, select:"
   puts "[a] to add a new teacher, or"
   puts "[x] to return to the main menu."
@@ -175,8 +176,9 @@ def student_menu
   puts "Here are the students currently in our database:"
   puts Student.show_list
 
-  puts "\nTo choose a teacher and class, unenroll, or remove a student from the database,"
-  puts "please select the index number of the student."
+  puts "\nPlease select the index number of a student,"
+  puts "to enroll a student in a class, unenroll a student,"
+  puts "or remove a student from the database,"
 
   puts "\nOtherwise, select:"
   puts "[a] to add a new student, or"
@@ -204,17 +206,17 @@ def student_menu
       student_menu
     end
     puts "\nPlease select from the following:"
-    puts "[t] to list all teachers and their apparatuses, and choose a class,"
+    puts "[e] to enroll #{@current_student.name} in a class,"
     puts "[s] to see which classes #{@current_student.name} is enrolled,"
-    puts "[u] to unenroll a student in a class,"
+    puts "[u] to unenroll #{@current_student.name} from a class,"
     puts "[r] to remove #{@current_student.name} from the database;"
     puts "[x] to return to the main menu."
 
     user_choice = gets.chomp
 
     case user_choice
-    when 't'
-      teachers_by_apparatus
+    when 'e'
+      enroll
     when 's'
       classes_enrolled
     when 'u'
@@ -243,7 +245,7 @@ def add_student
   student_menu
 end
 
-def teachers_by_apparatus
+def enroll
   puts "\nHere's a list of all the teachers and their apparatuses:"
   Teacher.all.each_with_index do |teacher, index|
     puts "#{index+1}. #{teacher.name} -- #{teacher.apparatus}"
@@ -260,13 +262,13 @@ def teachers_by_apparatus
       student_menu
     else
       puts "\nInvalid option. Please try again."
-      teachers_by_apparatus
+      enroll
     end
   else
     @current_teacher = Teacher.all.fetch((user_choice.to_i)-1) do |number|
       puts "\n#{number+1} is not a valid option. Please try again.\n\n"
       sleep(1)
-      teachers_by_apparatus
+      enroll
     end
     choose_teacher
   end
