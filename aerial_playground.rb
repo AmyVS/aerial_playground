@@ -1,5 +1,4 @@
 require 'pg'
-require 'pry'
 
 require './lib/ringmaster'
 require './lib/teacher'

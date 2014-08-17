@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'active_support/core_ext/string/inflections'
-require 'pry'
 
 class Ringmaster
 

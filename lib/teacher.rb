@@ -1,5 +1,3 @@
-require 'pry'
-
 class Teacher < Ringmaster
   attr_accessor :name, :apparatus, :id, :students
 
