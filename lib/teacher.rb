@@ -16,7 +16,8 @@ class Teacher < Ringmaster
   end
 
   def assign_to(student)
-    DB.exec("INSERT INTO classes (teacher_id, student_id) VALUES (#{@id}, #{student.id});")
+    results = DB.exec("INSERT INTO classes (teacher_id, student_id) VALUES (#{@id}, #{student.id}) RETURNING id;")
+    @id = results.first['id'].to_i
   end
 
   def students

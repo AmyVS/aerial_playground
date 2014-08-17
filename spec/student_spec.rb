@@ -55,4 +55,14 @@ describe Student do
     test_student.unenroll(test_teacher)
     expect(test_student.teachers).to eq []
   end
+
+  it 'removes student from classes if they are deleted from students table' do
+    test_student = Student.new({'name' => 'Lee'})
+    test_student.save
+    test_teacher = Teacher.new({'name' => 'Daniela', 'apparatus' => 'static trapeze'})
+    test_teacher.save
+    test_student.assign_to(test_teacher)
+    test_student.delete
+    expect(test_teacher.students).to eq []
+  end
 end
