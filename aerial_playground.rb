@@ -220,6 +220,7 @@ def student_menu
     end
     puts "\nPlease select from the following:"
     puts "[t] to list all teachers and their apparatuses, and choose a class,"
+    puts "[s] to see which classes #{@current_student.name} is enrolled,"
     puts "[u] to unenroll a student in a class,"
     puts "[r] to remove #{@current_student.name} from the database;"
     puts "[x] to return to the main menu."
@@ -229,6 +230,8 @@ def student_menu
     case user_choice
     when 't'
       teachers_by_apparatus
+    when 's'
+      classes_enrolled
     when 'u'
       unenroll
     when 'r'
@@ -281,6 +284,25 @@ def teachers_by_apparatus
       teachers_by_apparatus
     end
     choose_teacher
+  end
+end
+
+def classes_enrolled
+  if @current_student.teachers.length == 0
+    puts "\nLooks like #{@current_student.name} has yet to enroll in a class."
+    puts "Returning to student menu..."
+    sleep(1.5)
+    student_menu
+  else
+    puts "\n#{@current_student.name} is enrolled in these classes:"
+    @current_student.teachers.each_with_index do |teacher, index|
+      puts "#{index+1}. #{teacher.name} -- #{teacher.apparatus}"
+    end
+    puts "Press any key to return to the student menu."
+    user_input = gets.chomp
+    if user_input
+      student_menu
+    end
   end
 end
 

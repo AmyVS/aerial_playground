@@ -1,7 +1,7 @@
 require 'pry'
 
 class Teacher < Ringmaster
-  attr_reader :name, :apparatus, :id, :students
+  attr_accessor :name, :apparatus, :id, :students
 
   def initialize attributes
     @name = attributes['name']

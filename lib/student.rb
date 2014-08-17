@@ -1,5 +1,5 @@
 class Student < Ringmaster
-  attr_reader :name, :id, :teachers
+  attr_accessor :name, :id, :teachers
 
   def initialize attributes
     @name = attributes['name']
