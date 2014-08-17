@@ -49,7 +49,7 @@ def teacher_menu
   puts "\nHere are the teachers currently in our database:"
   puts Teacher.show_list
 
-  puts "\nTo update or remove a teacher's information,"
+  puts "\nTo show assigned students or remove a teacher's information,"
   puts "please select the index number of the teacher."
   puts "\nOtherwise, select:"
   puts "[a] to add a new teacher, or"
@@ -78,7 +78,6 @@ def teacher_menu
     end
     puts "\nPlease select from the following:"
     puts "[s] to see all of #{@current_teacher.name}'s students,"
-    puts "[u] to update #{@current_teacher.name}'s apparatus,"
     puts "[r] to remove #{@current_teacher.name} from the database, or"
     puts "[x] to return to the teacher menu."
 
@@ -87,8 +86,6 @@ def teacher_menu
     case user_choice
     when 's'
       students_assigned_to_teacher
-    when 'u'
-      update_apparatus
     when 'r'
       remove_teacher
     when 'x'
@@ -143,18 +140,6 @@ def students_assigned_to_teacher
       unenroll
     end
   end
-end
-
-def update_apparatus #Work in progress
-  puts "\n#{@current_teacher.name}'s current apparatus: #{@current_teacher.apparatus}"
-  puts "What would you like #{@current_teacher.name}'s new apparatus to be?"
-
-  user_input = gets.chomp
-  @current_teacher.update_apparatus(user_input)
-
-  puts "#{@current_teacher.apparatus} is now listed as @#{current_teacher}'s apparatus."
-  sleep(1)
-  teacher_menu
 end
 
 def remove_teacher
