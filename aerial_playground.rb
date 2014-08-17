@@ -23,6 +23,7 @@ def main_menu
   puts "[t] if you are a teacher,"
   puts "[s] if you are a student, or"
   puts "[x] to exit."
+  puts "\nNote: to enroll a student, please select the student option."
   user_choice = gets.chomp
 
   case user_choice
@@ -47,10 +48,10 @@ def teacher_menu
   puts "*" * 12
 
   puts "\nHere are the teachers currently in our database:"
-  puts Teacher.show_list
+  puts Teacher.show_teachers
 
-  puts "\nplease select the index number of the teacher,"
-  puts "to show assigned students or remove a teacher's information,"
+  puts "\nPlease select the index number of the teacher,"
+  puts "to show their assigned students or remove a teacher's information."
 
   puts "\nOtherwise, select:"
   puts "[a] to add a new teacher, or"
@@ -178,7 +179,7 @@ def student_menu
 
   puts "\nPlease select the index number of a student,"
   puts "to enroll a student in a class, unenroll a student,"
-  puts "or remove a student from the database,"
+  puts "or remove a student from the database."
 
   puts "\nOtherwise, select:"
   puts "[a] to add a new student, or"

@@ -25,7 +25,7 @@ describe Teacher do
     test_teacher2 = Teacher.new({'name' => 'Shersten', 'apparatus' => 'straps'})
     test_teacher1.save
     test_teacher2.save
-    expect(Teacher.show_list).to eq ['1. Daniela', '2. Shersten']
+    expect(Teacher.show_teachers).to eq ['1. Daniela -- static trapeze', '2. Shersten -- straps']
   end
 
   it 'deletes a teacher from the database' do

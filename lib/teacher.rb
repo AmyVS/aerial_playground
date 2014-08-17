@@ -9,6 +9,14 @@ class Teacher < Ringmaster
     @id = attributes['id'].to_i
   end
 
+  def self.show_teachers
+    teachers = []
+    self.all.each_with_index do |object, index|
+      teachers << "#{index+1}. #{object.name} -- #{object.apparatus}"
+    end
+    teachers
+  end
+
   def students
     results = DB.exec("SELECT students.* FROM teachers
                         JOIN classes ON (teachers.id = classes.teacher_id)
