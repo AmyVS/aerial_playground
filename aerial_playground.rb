@@ -135,7 +135,7 @@ def students_assigned_to_teacher
       sleep(1)
       teacher_menu
     else
-      @current_student = Student.all.fetch((user_choice.to_i)-1) do |number|
+      @current_student = @current_teacher.students.fetch((user_input.to_i)-1) do |number|
       puts "#{number+1} is not a valid option. Please try again."
       sleep(1)
       students_assigned_to_teacher
@@ -190,7 +190,7 @@ def student_menu
   puts "Here are the students currently in our database:"
   puts Student.show_list
 
-  puts "\nTo change teachers or remove a student,"
+  puts "\nTo choose a teacher and class, unenroll, or remove a student from the database,"
   puts "please select the index number of the student."
 
   puts "\nOtherwise, select:"
@@ -230,7 +230,7 @@ def student_menu
     when 't'
       teachers_by_apparatus
     when 'u'
-      unenroll_student
+      unenroll
     when 'r'
       remove_student
     when 'x'
@@ -284,9 +284,25 @@ def teachers_by_apparatus
   end
 end
 
-# def unenroll_student
+def unenroll
+  puts "\nAre you sure you want to unenroll #{@current_student.name} from #{@current_teacher.name}'s class? y/n"
+  user_choice = gets.chomp
 
-# end
+  case user_choice
+  when 'y'
+    @current_student.unenroll(@current_teacher)
+    puts "\n#{@current_student.name} has been unenrolled from #{@current_teacher.name}'s class."
+    sleep(1)
+    teacher_menu
+  when 'n'
+    puts "\nNo worries, returning to main menu..."
+    sleep(1)
+    main_menu
+  else
+    puts "\nInvalid option. Please try again."
+    unenroll
+  end
+end
 
 def choose_teacher
   puts "\nYou've selected #{@current_teacher.name} and the apparatus, #{@current_teacher.apparatus}."
@@ -301,7 +317,7 @@ def choose_teacher
     sleep(1)
     student_menu
   when 'n'
-    puts "No worries, returning to student menu..."
+    puts "\nNo worries, returning to student menu..."
     sleep(1)
     student_menu
   else
